@@ -1,7 +1,6 @@
-import { ElementType, ReactNode } from 'react';
 import { clsx } from 'clsx';
+import { ElementType, ReactNode } from 'react';
 import { FontFamiliesClasses } from 'src/constants/articleProps';
-
 import styles from './index.module.scss';
 
 type TextProps = {
@@ -36,7 +35,7 @@ export const Text = ({
 	fontStyle = 'normal',
 	uppercase = false,
 	align = 'left',
-	family = 'open-sans',
+	family = 'open_sans',
 	dynamicLite = false,
 }: TextProps) => {
 	const className = clsx(

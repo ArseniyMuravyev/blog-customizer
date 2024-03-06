@@ -16,7 +16,12 @@ export const useOutsideClickClose = ({
 	useEffect(() => {
 		const handleClick = (event: MouseEvent) => {
 			const { target } = event;
-			if (target instanceof Node && !rootRef.current?.contains(target)) {
+			if (
+				rootRef.current &&
+				target instanceof HTMLElement &&
+				!rootRef.current.contains(target) &&
+				!target.closest("[data-testid='selectDropdown']")
+			) {
 				isOpen && onClose?.();
 				onChange?.(false);
 			}

@@ -1,8 +1,8 @@
-import { useState, useRef } from 'react';
-import type { MouseEventHandler } from 'react';
 import clsx from 'clsx';
-import { OptionType } from 'src/constants/articleProps';
 import { Text } from 'components/text';
+import type { MouseEventHandler } from 'react';
+import { useRef, useState } from 'react';
+import { OptionType } from 'src/constants/articleProps';
 import arrowDown from 'src/images/arrow-down.svg';
 import { Option } from './Option';
 import { isFontFamilyClass } from './helpers/isFontFamilyClass';
@@ -13,7 +13,7 @@ import styles from './Select.module.scss';
 
 type SelectProps = {
 	selected: OptionType | null;
-	options: OptionType[];
+	options: OptionType[] | undefined;
 	placeholder?: string;
 	onChange?: (selected: OptionType) => void;
 	onClose?: () => void;
@@ -42,6 +42,7 @@ export const Select = (props: SelectProps) => {
 		setIsOpen(false);
 		onChange?.(option);
 	};
+
 	const handlePlaceHolderClick: MouseEventHandler<HTMLDivElement> = () => {
 		setIsOpen((isOpen) => !isOpen);
 	};
@@ -87,15 +88,16 @@ export const Select = (props: SelectProps) => {
 				</div>
 				{isOpen && (
 					<ul className={styles.select} data-testid='selectDropdown'>
-						{options
-							.filter((option) => selected?.value !== option.value)
-							.map((option) => (
-								<Option
-									key={option.value}
-									option={option}
-									onClick={() => handleOptionClick(option)}
-								/>
-							))}
+						{options &&
+							options
+								.filter((option) => selected?.value !== option.value)
+								.map((option) => (
+									<Option
+										key={option.value}
+										option={option}
+										onClick={() => handleOptionClick(option)}
+									/>
+								))}
 					</ul>
 				)}
 			</div>

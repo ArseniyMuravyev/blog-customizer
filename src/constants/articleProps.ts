@@ -1,8 +1,8 @@
 export const fontFamilyClasses = [
-	'open-sans',
+	'open_sans',
 	'ubuntu',
-	'cormorant-garamond',
-	'days-one',
+	'cormorant_garamond',
+	'days_one',
 	'merriweather',
 ] as const;
 

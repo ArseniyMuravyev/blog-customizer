@@ -1,15 +1,15 @@
-import { OptionType } from 'src/constants/articleProps';
 import { Text } from 'components/text';
+import { OptionType } from 'src/constants/articleProps';
 import { Option } from './Option';
 
 import styles from './RadioGroup.module.scss';
 
 type RadioGroupProps = {
-	name: string;
-	options: OptionType[];
+	name: string | undefined;
+	options: OptionType[] | undefined;
 	selected: OptionType;
 	onChange?: (value: OptionType) => void;
-	title: string;
+	title: string | undefined;
 };
 
 export const RadioGroup = (props: RadioGroupProps) => {
@@ -27,17 +27,18 @@ export const RadioGroup = (props: RadioGroupProps) => {
 				</>
 			)}
 			<div className={styles.group}>
-				{options.map((option) => (
-					<Option
-						key={option.value}
-						groupName={name}
-						value={option.value}
-						title={option.title}
-						selected={selected}
-						onChange={() => handleChange(option)}
-						option={option}
-					/>
-				))}
+				{options &&
+					options.map((option) => (
+						<Option
+							key={option.value}
+							groupName={name}
+							value={option.value}
+							title={option.title}
+							selected={selected}
+							onChange={() => handleChange(option)}
+							option={option}
+						/>
+					))}
 			</div>
 		</div>
 	);
