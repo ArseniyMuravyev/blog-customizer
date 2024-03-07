@@ -13,7 +13,7 @@ import styles from './Select.module.scss';
 
 type SelectProps = {
 	selected: OptionType | null;
-	options: OptionType[] | undefined;
+	options?: OptionType[];
 	placeholder?: string;
 	onChange?: (selected: OptionType) => void;
 	onClose?: () => void;
@@ -88,16 +88,15 @@ export const Select = (props: SelectProps) => {
 				</div>
 				{isOpen && (
 					<ul className={styles.select} data-testid='selectDropdown'>
-						{options &&
-							options
-								.filter((option) => selected?.value !== option.value)
-								.map((option) => (
-									<Option
-										key={option.value}
-										option={option}
-										onClick={() => handleOptionClick(option)}
-									/>
-								))}
+						{options
+							?.filter((option) => selected?.value !== option.value)
+							.map((option) => (
+								<Option
+									key={option.value}
+									option={option}
+									onClick={() => handleOptionClick(option)}
+								/>
+							))}
 					</ul>
 				)}
 			</div>
