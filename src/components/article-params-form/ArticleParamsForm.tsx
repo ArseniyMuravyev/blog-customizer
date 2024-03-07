@@ -52,42 +52,46 @@ export const ArticleParamsForm: FC<ArticleParamsFormProps> = ({
 					<Text size={31} weight={800} uppercase dynamicLite>
 						задайте параметры
 					</Text>
-					{selectTypes.map((type, index) =>
-						type.type === 'separator' ? (
-							<Separator key={index} />
-						) : type.type === 'select' ? (
-							<Select
-								key={type.name}
-								selected={
-									selectedOptions[type.stateKey as keyof ArticleStateType]
-								}
-								onChange={(selectedOption) =>
-									handleOptionChange(
-										type.stateKey as keyof ArticleStateType,
-										selectedOption
-									)
-								}
-								options={type.option}
-								title={type.name}
-							/>
-						) : (
-							<RadioGroup
-								key={type.name}
-								name={type.name}
-								selected={
-									selectedOptions[type.stateKey as keyof ArticleStateType]
-								}
-								onChange={(selectedOption) =>
-									handleOptionChange(
-										type.stateKey as keyof ArticleStateType,
-										selectedOption
-									)
-								}
-								options={type.option}
-								title={type.name}
-							/>
-						)
-					)}
+					{selectTypes.map((type, index) => {
+						if (type.type === 'separator') {
+							return <Separator key={index} />;
+						} else if (type.type === 'select') {
+							return (
+								<Select
+									key={type.name}
+									selected={
+										selectedOptions[type.stateKey as keyof ArticleStateType]
+									}
+									onChange={(selectedOption) =>
+										handleOptionChange(
+											type.stateKey as keyof ArticleStateType,
+											selectedOption
+										)
+									}
+									options={type.option}
+									title={type.name}
+								/>
+							);
+						} else {
+							return (
+								<RadioGroup
+									key={type.name}
+									name={type.name}
+									selected={
+										selectedOptions[type.stateKey as keyof ArticleStateType]
+									}
+									onChange={(selectedOption) =>
+										handleOptionChange(
+											type.stateKey as keyof ArticleStateType,
+											selectedOption
+										)
+									}
+									options={type.option}
+									title={type.name}
+								/>
+							);
+						}
+					})}
 					<div className={styles.bottomContainer}>
 						<Button title='Сбросить' type='reset' onClick={handleReset} />
 						<Button title='Применить' type='submit' onClick={handleSubmit} />
