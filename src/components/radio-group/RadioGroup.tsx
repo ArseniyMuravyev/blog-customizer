@@ -5,11 +5,11 @@ import { Option } from './Option';
 import styles from './RadioGroup.module.scss';
 
 type RadioGroupProps = {
-	name: string | undefined;
-	options: OptionType[] | undefined;
+	name?: string;
+	options?: OptionType[];
 	selected: OptionType;
 	onChange?: (value: OptionType) => void;
-	title: string | undefined;
+	title?: string;
 };
 
 export const RadioGroup = (props: RadioGroupProps) => {
@@ -27,18 +27,17 @@ export const RadioGroup = (props: RadioGroupProps) => {
 				</>
 			)}
 			<div className={styles.group}>
-				{options &&
-					options.map((option) => (
-						<Option
-							key={option.value}
-							groupName={name}
-							value={option.value}
-							title={option.title}
-							selected={selected}
-							onChange={() => handleChange(option)}
-							option={option}
-						/>
-					))}
+				{options?.map((option) => (
+					<Option
+						key={option.value}
+						groupName={name}
+						value={option.value}
+						title={option.title}
+						selected={selected}
+						onChange={() => handleChange(option)}
+						option={option}
+					/>
+				))}
 			</div>
 		</div>
 	);
